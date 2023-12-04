@@ -1,0 +1,59 @@
+<!-- age-calculator.component.html -->
+
+<div class="bg-slate-200 flex w-full justify-center align-middle h-screen font-sans">
+  <div class="border bg-white w-1/2 gap-4 p-4 my-10 rounded-3xl wrap">
+    <form [formGroup]="ageForm">
+      <div class="flex justify-around items-center mb-10">
+        <div class="w-1/4 pb-2 relative flex flex-col" [ngClass]="{'error-cls': ageForm.get('day')?.hasError('max') && ageForm.get('day')?.touched && !ageForm.get('day')?.hasError('required') || ageForm.get('day')?.hasError('required') && ageForm.get('day')?.touched}">
+          <label class="font-bold" for="day">DAY</label>
+          <input type="number" class="border rounded mb-2 p-2" formControlName="day">
+          <div class="absolute italic text-rose-700 text-xs bottom-0" *ngIf="ageForm.get('day')?.hasError('required') && ageForm.get('day')?.touched">
+            This field is required
+          </div>
+          <div class="absolute italic text-rose-700 text-xs bottom-0" *ngIf="ageForm.get('day')?.hasError('max') && ageForm.get('day')?.touched && !ageForm.get('day')?.hasError('required')">
+            Must be a valid day
+          </div>
+        </div>
+        <div class="w-1/4 pb-2 relative flex flex-col" [ngClass]="{'error-cls': ageForm.get('month')?.hasError('max') && ageForm.get('month')?.touched || ageForm.get('month')?.hasError('required') && ageForm.get('month')?.touched}">
+          <label class="font-bold" for="month">MONTH</label>
+          <input type="number" class="border rounded mb-2 p-2" formControlName="month">
+          <div class="absolute italic text-rose-700 text-xs bottom-0" *ngIf="ageForm.get('month')?.hasError('required') && ageForm.get('month')?.touched">
+            This field is required
+          </div>
+          <div class="absolute italic text-rose-700 text-xs bottom-0" *ngIf="ageForm.get('month')?.hasError('max') && ageForm.get('month')?.touched">
+            Must be a valid month
+          </div>
+        </div>
+        <div class="w-1/4 pb-2 relative flex flex-col" [ngClass]="{'error-cls': ageForm.get('year')?.hasError('max') && ageForm.get('year')?.touched || ageForm.get('year')?.hasError('required') && ageForm.get('year')?.touched}">
+          <label class="font-bold" for="year">YEAR</label>
+          <input type="number" class="border rounded mb-2 p-2" formControlName="year">
+          <div class="absolute italic text-rose-700 text-xs bottom-0" *ngIf="ageForm.get('year')?.hasError('required') && ageForm.get('year')?.touched">
+            This field is required
+          </div>
+          <div class="absolute italic text-rose-700 text-xs bottom-0" *ngIf="ageForm.get('year')?.hasError('max') && ageForm.get('year')?.touched">
+            Must be in the past
+          </div>
+        </div>
+
+        
+      </div>
+      <div class="border relative m-5">
+        <button class="submit-btn text-6xl absolute bg-violet-800 rounded-full w-20 h-20 text-white right-0 bottom-0" (click)="calculateAge()">&#8595;</button>
+      </div>
+      
+
+        <div class="ml-4">
+          <p class="text-8xl font-bold italic">
+            <span class="text-violet-800" *ngIf="age?.years; else elseTemp">{{ age?.years }}</span> years
+            <br> 
+            <span class="text-violet-800" *ngIf="age?.months; else elseTemp">{{ age?.months }}</span> months
+            <br> 
+            <span class="text-violet-800" *ngIf="age?.days; else elseTemp">{{ age?.days }}</span> days
+            <ng-template #elseTemp>
+            <span class="text-violet-800">--</span>
+            </ng-template>
+          </p>
+        </div>
+    </form>
+  </div>
+</div>

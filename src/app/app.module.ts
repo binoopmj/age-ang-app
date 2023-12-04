@@ -1,16 +1,20 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+// app.module.ts
 
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
+import { AgeCalculatorComponent } from './age-calculator/age-calculator.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AgeCalculatorComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    ReactiveFormsModule // Import ReactiveFormsModule to use reactive forms
   ],
   providers: [],
   bootstrap: [AppComponent]
